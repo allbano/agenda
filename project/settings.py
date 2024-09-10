@@ -1,3 +1,6 @@
+# type: ignore
+# pylint: disable=unused-import
+
 """
 Django settings for project project.
 
@@ -56,9 +59,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ 
-            os.path.join(BASE_DIR, "base_templates"),    
-        ],
+        'DIRS': [ os.path.join(BASE_DIR, "base_templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,9 +127,15 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+try:
+    from project import local_settings
+except ImportError:
+    ...
